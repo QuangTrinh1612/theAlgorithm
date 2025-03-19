@@ -12,19 +12,33 @@ class MergeSort(BaseSort):
             List: Sorted list of elements
         """
 
-        result = arr
-        n = len(result)
-
-        for i in range(n):
+        # Base case
+        if len(arr) <= 1:
+            return arr
             
-            swap = False
-
-            for j in range(n-i-1):
-                if result[j] > result[j+1]:
-                    result[j], result[j+1] = result[j+1], result[j]
-                    swap = True
-            
-            if not swap:
-                break
+        # Divide array into two halves
+        mid = len(arr) // 2
+        left = self.sort(arr[:mid])
+        right = self.sort(arr[mid:])
         
+        # Merge the sorted halves
+        return self.__merge(left, right)
+
+    def __merge(self, left, right):
+        """Merge two sorted arrays"""
+        result = []
+        i = j = 0
+        
+        # Compare elements from both arrays and add smaller one to result
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+                
+        # Add remaining elements
+        result.extend(left[i:])
+        result.extend(right[j:])
         return result
