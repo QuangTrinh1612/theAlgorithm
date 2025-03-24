@@ -1,11 +1,12 @@
 import pytest
-from algorithms.sort import BubbleSort, MergeSort
+from algorithms.sort import BubbleSort, MergeSort, SelectionSort
 
 @pytest.fixture
 def sorting_algorithms():
     return {
         "merge_sort": MergeSort(),
-        "bubble_sort": BubbleSort()
+        "bubble_sort": BubbleSort(),
+        "selection_sort": SelectionSort()
     }
 
 @pytest.mark.parametrize("input_arr, expected", [
